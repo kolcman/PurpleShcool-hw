@@ -19,8 +19,9 @@
   font-weight: normal;
 }
 
-body {
-  min-height: 100vh;
+body,
+html {
+  min-height: 100dvh;
   color: var(--color-primary);
   background: var(--color-bg);
   transition:
