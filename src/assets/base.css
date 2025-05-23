@@ -1,3 +1,14 @@
+:root {
+  --color-primary: #000000;
+  --color-secondery: #ffffff;
+  --color-bg: #f0f4f8;
+  --color-btn: #008bfe;
+  --color-btn-hover: #006fcb;
+  --color-like: #008bfe;
+  --color-answer-right: #09bb00;
+  --color-answer-wrong: #d00303;
+}
+
 *,
 *::before,
 *::after {
@@ -10,11 +21,11 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition: color 0.5s, background-color 0.5s;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
   line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
