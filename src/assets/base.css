@@ -7,6 +7,8 @@
   --color-like: #008bfe;
   --color-answer-right: #09bb00;
   --color-answer-wrong: #d00303;
+
+  --font: 'Roboto', sans-serif;
 }
 
 *,
@@ -25,7 +27,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font);
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
