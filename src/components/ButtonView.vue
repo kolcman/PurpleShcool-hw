@@ -11,11 +11,12 @@
 <style scoped>
 .btn {
     background-color: var(--color-btn);
-    width: 335px;
+    min-width: 335px;
+    width: max-content;
     padding: 10px 16px;
     border: none;
     border-radius: 100px;
-    color: var(--color-secondery);
+    color: var(--color-secondary);
     font-size: 24px;
     line-height: 36px;
 }

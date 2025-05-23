@@ -1,6 +1,6 @@
 <template>
     <main class="main">
-        <ButtonView>Начать игру</ButtonView>
+        <ButtonView aria-label="Начать новую игру">Начать игру</ButtonView>
     </main>
 </template>
 
@@ -16,7 +16,6 @@ import ButtonView from './components/ButtonView.vue';
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
 }
 </style>
