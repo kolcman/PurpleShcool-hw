@@ -1,12 +1,16 @@
 <template>
     <div class="header">
         <h1 class="header-title">Запомни слово</h1>
-        <Score class="header-count" :count="100" />
+        <Score class="header-count" :count="count" />
     </div>
 </template>
 
 <script setup>
 import Score from '@/components/Score.vue'
+import { ref } from 'vue';
+
+const count = ref(0)
+
 </script>
 
 <style scoped>
@@ -25,6 +29,4 @@ import Score from '@/components/Score.vue'
     color: var(--color-text);
 
 }
-
-.header-count {}
 </style>

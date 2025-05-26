@@ -12,9 +12,6 @@
 import Header from '@/components/Header.vue';
 import Card from '@/components/Card.vue'
 
-const num = "01";
-const text = "text"
-
 
 function flipCard() {
 
