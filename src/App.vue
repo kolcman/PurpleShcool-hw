@@ -1,12 +1,24 @@
 <template>
+    <Header />
     <main class="main">
-        <ButtonView aria-label="Начать новую игру">Начать игру</ButtonView>
+        <!-- <Button aria-label="Начать новую игру">Начать игру</Button> -->
+        <Card :text="text" :num="num" @flip-card="flipCard" />
     </main>
 </template>
 
 
 <script setup>
-import ButtonView from './components/ButtonView.vue';
+// import Button from '@/components/Button.vue';
+import Header from '@/components/Header.vue';
+import Card from '@/components/Card.vue'
+
+const num = "01";
+const text = "text"
+
+
+function flipCard() {
+
+}
 
 </script>
 
