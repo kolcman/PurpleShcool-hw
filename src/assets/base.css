@@ -1,10 +1,13 @@
 :root {
   --color-primary: #000000;
   --color-secondary: #ffffff;
+  --color-text: #222222;
   --color-bg: #f0f4f8;
   --color-btn: #008bfe;
   --color-btn-hover: #006fcb;
   --color-like: #008bfe;
+  --color-like-bg: #cce8ff;
+  --color-card-border: #cce8ff;
   --color-answer-right: #09bb00;
   --color-answer-wrong: #d00303;
 

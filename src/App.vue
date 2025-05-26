@@ -1,12 +1,29 @@
 <template>
+    <Header />
     <main class="main">
-        <ButtonView aria-label="Начать новую игру">Начать игру</ButtonView>
+        <!-- <Button aria-label="Начать новую игру">Начать игру</Button> -->
+        <Card v-bind="card" @flip-card="flipCard" />
     </main>
 </template>
 
 
 <script setup>
-import ButtonView from './components/ButtonView.vue';
+// import Button from '@/components/Button.vue';
+import Header from '@/components/Header.vue';
+import Card from '@/components/Card.vue'
+import { ref } from 'vue';
+
+const card = ref({
+    num: "01",
+    word: "word",
+    translation: "transl",
+    state: "open",
+    status: "pending"
+})
+
+function flipCard() {
+
+}
 
 </script>
 
