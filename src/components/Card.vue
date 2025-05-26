@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-inner">
             <div class="card-number">{{ props.num }}</div>
-            <div class="card-text">{{ props.text }}</div>
+            <div class="card-text">{{ props.word }}</div>
+            <div class="card-text">{{ props.translation }}</div>
             <div class="btns">
                 <button class="btns-flip" @click="flipCard()">Перевернуть</button>
                 <button class="btns-wrong">
@@ -23,8 +24,11 @@ import IconWrong from './IconWrong.vue'
 
 const props = defineProps({
     num: String,
-    text: String
-})
+    word: String,
+    translation: String,
+    state: String,
+    status: String
+});
 
 const emit = defineEmits(['flipCard', 'changeStatus'])
 
