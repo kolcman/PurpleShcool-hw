@@ -7,10 +7,10 @@
                 <div v-else>{{ props.translation }}</div>
             </div>
             <div class="card-btns">
-                <button v-if="state && status === 'pending'" class="btns-wrong">
+                <button v-if="state && status === 'pending'" class="btns-wrong" @click="changeStatus('wrong')">
                     <IconWrong />
                 </button>
-                <button v-if="state && status === 'pending'" class="btns-right">
+                <button v-if="state && status === 'pending'" class="btns-right" @click="changeStatus('right')">
                     <IconRight />
                 </button>
                 <button v-else-if="!state" class="btns-flip" @click="flipCard()">
@@ -41,13 +41,12 @@ const props = defineProps({
 
 const emit = defineEmits(['flipCard', 'changeStatus'])
 
-function changeStatus() {
-    emit('changeStatus')
+function changeStatus(newStatus) {
+    emit('changeStatus', newStatus)
 }
 
 
 function flipCard() {
-
     emit('flipCard')
 }
 
