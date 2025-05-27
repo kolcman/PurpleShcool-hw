@@ -13,6 +13,7 @@
                 <button v-if="state && status === 'pending'" class="btns-right" @click="changeStatus('right')">
                     <IconRight />
                 </button>
+
                 <button v-else-if="!state" class="btns-flip" @click="flipCard()">
                     Перевернуть
                 </button>
