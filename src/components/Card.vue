@@ -70,6 +70,10 @@ const emit = defineEmits(['changeStatus', 'flipCard'])
 function changeStatus(newStatus) {
     emit('changeStatus', newStatus)
 }
+// function flipCard() {
+//     emit('flipCard')
+// }
+
 function flipCard() {
     emit('flipCard')
 }
