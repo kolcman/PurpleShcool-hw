@@ -3,7 +3,7 @@
     <main class="main">
         <!-- <Button aria-label="Начать новую игру">Начать игру</Button> -->
         <ul class="card-list">
-            <Card v-for="card in data" :key="card.num" v-bind="card" @flip-card="flipCard(card)"
+            <Card v-for="card in data" :key="card.id" v-bind="card" @flip-card="flipCard(card)"
                 @change-status="(newStatus) => changeStatus(card, newStatus)" />
         </ul>
     </main>
@@ -14,39 +14,31 @@
 // import Button from '@/components/Button.vue';
 import Header from '@/components/Header.vue';
 import Card from '@/components/Card.vue'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+
+onMounted(() => {
+    loadData()
+})
+
+const API_ENDPOINT = 'http://localhost:8080/api/random-words';
 
 
-const data = ref([
-    {
-        num: "01",
-        word: "Apple",
-        translation: "Яблоко",
-        state: false,
-        status: "pending"
-    },
-    {
-        num: "02",
-        word: "Green",
-        translation: "Зеленый",
-        state: true,
-        status: "pending"
-    },
-    {
-        num: "03",
-        word: "Army",
-        translation: "Армия",
-        state: true,
-        status: "right"
-    },
-    {
-        num: "04",
-        word: "Car",
-        translation: "Автомобиль",
-        state: true,
-        status: "wrong"
-    },
-]);
+const data = ref();
+
+async function loadData() {
+    const res = await fetch(API_ENDPOINT);
+    if (res.ok) {
+        const raw = await res.json()
+
+        data.value = raw.map((word, index) => ({
+            id: index,
+            word: word.word,
+            translation: word.translation,
+            state: false,
+            status: 'pending',
+        }));
+    }
+}
 
 
 function flipCard(card) {
