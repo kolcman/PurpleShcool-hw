@@ -7,6 +7,7 @@
                 <div v-else>{{ props.translation }}</div>
             </div>
             <div class="card-btns">
+
                 <button v-if="state && status === 'pending'" class="btns-wrong" @click="changeStatus('wrong')">
                     <IconWrong />
                 </button>
@@ -27,7 +28,7 @@
     </div>
 </template>
 
-<!-- <script setup>
+<script setup>
 
 import IconRight from './IconRight.vue'
 import IconWrong from './IconWrong.vue'
@@ -49,38 +50,7 @@ function changeStatus(newStatus) {
 function flipCard() {
     emit('flipCard')
 }
-</script> -->
-
-
-<script setup>
-
-import IconRight from './IconRight.vue'
-import IconWrong from './IconWrong.vue'
-
-const props = defineProps({
-    num: String,
-    word: String,
-    translation: String,
-    state: Boolean,
-    status: String
-});
-
-const emit = defineEmits(['changeStatus', 'flipCard'])
-
-function changeStatus(newStatus) {
-    emit('changeStatus', newStatus)
-}
-// function flipCard() {
-//     emit('flipCard')
-// }
-
-function flipCard() {
-    emit('flipCard')
-}
-
-
 </script>
-
 
 
 <style scoped>
