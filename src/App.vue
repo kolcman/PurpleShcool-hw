@@ -2,7 +2,10 @@
     <Header />
     <main class="main">
         <!-- <Button aria-label="Начать новую игру">Начать игру</Button> -->
-        <Card v-bind="card" @flip-card="flipCard" />
+        <ul class="card-list">
+            <Card v-for="card in data" :key="card.num" v-bind="card" @flip-card="flipCard(card)"
+                @change-status="(newStatus) => changeStatus(card, newStatus)" />
+        </ul>
     </main>
 </template>
 
@@ -13,20 +16,48 @@ import Header from '@/components/Header.vue';
 import Card from '@/components/Card.vue'
 import { ref } from 'vue';
 
-const card = ref({
-    num: "01",
-    word: "word",
-    translation: "transl",
-    state: "open",
-    status: "pending"
-})
 
-function flipCard() {
+const data = ref([
+    {
+        num: "01",
+        word: "Apple",
+        translation: "Яблоко",
+        state: false,
+        status: "pending"
+    },
+    {
+        num: "02",
+        word: "Green",
+        translation: "Зеленый",
+        state: true,
+        status: "pending"
+    },
+    {
+        num: "03",
+        word: "Army",
+        translation: "Армия",
+        state: true,
+        status: "right"
+    },
+    {
+        num: "04",
+        word: "Car",
+        translation: "Автомобиль",
+        state: true,
+        status: "wrong"
+    },
+]);
 
+
+function flipCard(card) {
+    card.state = true
+}
+
+function changeStatus(card, newStatus) {
+    card.status = newStatus
 }
 
 </script>
-
 
 <style scoped>
 .main {
@@ -34,5 +65,11 @@ function flipCard() {
     justify-content: center;
     align-items: center;
     height: 100dvh;
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 66px 107px;
 }
 </style>

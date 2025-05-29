@@ -2,16 +2,27 @@
     <div class="card">
         <div class="card-inner">
             <div class="card-number">{{ props.num }}</div>
-            <div class="card-text">{{ props.word }}</div>
-            <div class="card-text">{{ props.translation }}</div>
-            <div class="btns">
-                <button class="btns-flip" @click="flipCard()">Перевернуть</button>
-                <button class="btns-wrong">
+            <div class="card-words">
+                <div v-if="!state">{{ props.word }}</div>
+                <div v-else>{{ props.translation }}</div>
+            </div>
+            <div class="card-btns">
+
+                <button v-if="state && status === 'pending'" class="btns-wrong" @click="changeStatus('wrong')">
                     <IconWrong />
                 </button>
-                <button class="btns-right">
+                <button v-if="state && status === 'pending'" class="btns-right" @click="changeStatus('right')">
                     <IconRight />
                 </button>
+
+                <button v-else-if="!state" class="btns-flip" @click="flipCard()">
+                    Перевернуть
+                </button>
+                <div v-else class="card-status">Завершено</div>
+            </div>
+            <div>
+                <IconRight v-if="status === 'right'" class="card-icon" />
+                <IconWrong v-else-if="status === 'wrong'" class="card-icon" />
             </div>
         </div>
     </div>
@@ -26,23 +37,21 @@ const props = defineProps({
     num: String,
     word: String,
     translation: String,
-    state: String,
+    state: Boolean,
     status: String
 });
 
 const emit = defineEmits(['flipCard', 'changeStatus'])
 
-function changeStatus() {
-    emit('changeStatus')
+function changeStatus(newStatus) {
+    emit('changeStatus', newStatus)
 }
-
 
 function flipCard() {
-
     emit('flipCard')
 }
-
 </script>
+
 
 <style scoped>
 .card {
@@ -79,14 +88,14 @@ function flipCard() {
 }
 
 
-.card-text {
+.card-words {
     font-size: 18px;
     line-height: 100%;
     text-transform: lowercase;
 
 }
 
-.btns {
+.card-btns {
     display: flex;
     gap: 32px;
     padding: 9px;
@@ -96,6 +105,16 @@ function flipCard() {
     bottom: 28px;
     left: 50%;
     transform: translate(-50%, 50%);
+}
+
+.card-icon {
+    position: absolute;
+    width: 39px;
+    height: 39px;
+    top: 28px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 
@@ -108,14 +127,12 @@ function flipCard() {
     font-weight: 700;
     font-size: 12px;
     line-height: 18px;
-    letter-spacing: 12%;
     text-transform: uppercase;
     cursor: pointer;
 }
 
 .btns-wrong,
 .btns-right {
-    display: none;
     width: fit-content;
     border: none;
     background: var(--color-secondary);
@@ -124,17 +141,12 @@ function flipCard() {
     align-items: center;
 }
 
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+.card-status {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 12%;
+    text-transform: uppercase;
 }
 </style>
