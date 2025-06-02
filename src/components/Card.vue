@@ -50,7 +50,7 @@ function changeStatus(newStatus) {
     if (newStatus === 'wrong') {
         if (points.value >= 4) {
             points.value -= 4
-            console.log(points);
+
         }
     }
     else if (newStatus === "right") {
