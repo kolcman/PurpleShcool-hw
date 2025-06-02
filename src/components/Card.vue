@@ -30,9 +30,12 @@
 
 <script setup>
 
+import { inject } from 'vue';
 import IconRight from './IconRight.vue'
 import IconWrong from './IconWrong.vue'
+import { providePoints } from '@/constants';
 
+const points = inject(providePoints);
 const props = defineProps({
     num: String,
     word: String,
@@ -40,10 +43,19 @@ const props = defineProps({
     state: Boolean,
     status: String
 });
-
 const emit = defineEmits(['flipCard', 'changeStatus'])
 
+
 function changeStatus(newStatus) {
+    if (newStatus === 'wrong') {
+        if (points.value >= 4) {
+            points.value -= 4
+            console.log(points);
+        }
+    }
+    else if (newStatus === "right") {
+        points.value += 10
+    }
     emit('changeStatus', newStatus)
 }
 
