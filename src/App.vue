@@ -6,8 +6,8 @@
             игру</Button>
         <div v-else class="game">
             <ul class="card-list">
-                <Card v-for="card in data" :key="card.id" v-bind="card" @flip-card="flipCard(card)"
-                    @change-status="(newStatus) => changeStatus(card, newStatus)" />
+                <Card v-for="(card, index) in data" :key="card.id" v-bind="card" :num="index"
+                    @flip-card="flipCard(card)" @change-status="(newStatus) => changeStatus(card, newStatus)" />
             </ul>
             <Button class="btn btn-restart" aria-label="Начать заново" @click="restartGame()">Заново</Button>
         </div>

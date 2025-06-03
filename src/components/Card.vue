@@ -15,7 +15,7 @@
                     <IconRight />
                 </button>
 
-                <button v-else-if="!state" class="btns-flip" @click="flipCard()">
+                <button v-else-if="!state" class="btns-flip" @click="flipCard">
                     Перевернуть
                 </button>
                 <div v-else class="card-status">Завершено</div>
@@ -48,10 +48,7 @@ const emit = defineEmits(['flipCard', 'changeStatus'])
 
 function changeStatus(newStatus) {
     if (newStatus === 'wrong') {
-        if (points.value >= 4) {
-            points.value -= 4
-
-        }
+        points.value -= 4
     }
     else if (newStatus === "right") {
         points.value += 10
@@ -93,6 +90,7 @@ function flipCard() {
 .card-number {
     font-size: 14px;
     position: absolute;
+    padding: 3px;
     top: 28px;
     left: 35px;
     transform: translateY(-50%);
