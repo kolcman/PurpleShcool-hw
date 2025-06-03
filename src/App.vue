@@ -1,6 +1,7 @@
 <template>
     <Header class="header" />
     <main class="main">
+        <ErrorMessage v-if="error" class="error" />
         <Button v-if="!isGameStarted" class="btn btn-start" aria-label="Начать новую игру" @click="startGame()">Начать
             игру</Button>
         <div v-else class="game">
@@ -15,11 +16,11 @@
 
 
 <script setup>
-// import Button from '@/components/Button.vue';
 import Header from '@/components/Header.vue';
 import Card from '@/components/Card.vue'
 import { onMounted, provide, ref } from 'vue';
 import { API_ENDPOINT, providePoints } from '@/constants';
+import ErrorMessage from './components/ErrorMessage.vue';
 
 onMounted(() => {
     loadData()
@@ -29,13 +30,18 @@ onMounted(() => {
 const data = ref();
 const points = ref(0);
 let isGameStarted = ref(false);
+let error = ref(false)
 
 provide(providePoints, points)
 
 async function loadData() {
-    const res = await fetch(API_ENDPOINT);
-    if (res.ok) {
-        const raw = await res.json()
+    try {
+        const res = await fetch(API_ENDPOINT);
+        if (!res.ok) {
+            throw new Error('Ошибка загрузки данных');
+        }
+
+        const raw = await res.json();
 
         data.value = raw.map((word, index) => ({
             id: index,
@@ -44,6 +50,10 @@ async function loadData() {
             state: false,
             status: 'pending',
         }));
+
+        error.value = false;
+    } catch (err) {
+        error.value = true;
     }
 }
 
@@ -52,6 +62,8 @@ function startGame() {
 }
 
 function restartGame() {
+    isGameStarted.value = false;
+    error.value = false
     loadData()
     points.value = 0
 }
@@ -74,6 +86,7 @@ function changeStatus(card, newStatus) {
 
 .main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100dvh;
@@ -109,5 +122,12 @@ function changeStatus(card, newStatus) {
 
 .btn:hover {
     background-color: var(--color-btn-hover);
+}
+
+
+.error {
+    margin: 0 auto;
+    font-size: 52px;
+    color: red;
 }
 </style>
