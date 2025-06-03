@@ -1,15 +1,16 @@
 <template>
     <div class="header">
         <h1 class="header-title">Запомни слово</h1>
-        <Score class="header-count" :count="count" />
+        <Score class="header-count" :count="points" />
     </div>
 </template>
 
 <script setup>
 import Score from '@/components/Score.vue'
-import { ref } from 'vue';
+import { providePoints } from '@/constants';
+import { inject } from 'vue';
 
-const count = ref(0)
+const points = inject(providePoints);
 
 </script>
 

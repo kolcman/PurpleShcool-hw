@@ -1,16 +1,16 @@
 <template>
     <div class="score">
-        <div class="score-text">{{ props.count }}</div>
+        <div class="score-text">{{ points }}</div>
         <IconHeart class="score-icon" aria-hidden="true" />
     </div>
 </template>
 
 <script setup>
+import { inject } from 'vue';
 import IconHeart from './IconHeart.vue';
+import { providePoints } from '@/constants';
 
-const props = defineProps({
-    count: Number
-})
+const points = inject(providePoints);
 
 </script>
 

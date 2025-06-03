@@ -15,7 +15,7 @@
                     <IconRight />
                 </button>
 
-                <button v-else-if="!state" class="btns-flip" @click="flipCard()">
+                <button v-else-if="!state" class="btns-flip" @click="flipCard">
                     Перевернуть
                 </button>
                 <div v-else class="card-status">Завершено</div>
@@ -30,9 +30,12 @@
 
 <script setup>
 
+import { inject } from 'vue';
 import IconRight from './IconRight.vue'
 import IconWrong from './IconWrong.vue'
+import { providePoints } from '@/constants';
 
+const points = inject(providePoints);
 const props = defineProps({
     num: String,
     word: String,
@@ -40,10 +43,16 @@ const props = defineProps({
     state: Boolean,
     status: String
 });
-
 const emit = defineEmits(['flipCard', 'changeStatus'])
 
+
 function changeStatus(newStatus) {
+    if (newStatus === 'wrong') {
+        points.value -= 4
+    }
+    else if (newStatus === "right") {
+        points.value += 10
+    }
     emit('changeStatus', newStatus)
 }
 
@@ -81,6 +90,7 @@ function flipCard() {
 .card-number {
     font-size: 14px;
     position: absolute;
+    padding: 3px;
     top: 28px;
     left: 35px;
     transform: translateY(-50%);
